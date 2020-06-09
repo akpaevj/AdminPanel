@@ -1,0 +1,120 @@
+﻿@model AdminPanel.ViewModels.InfoBasesLists.InfoBasesListViewModel
+
+@{
+    var selectedInfoBases = ViewBag.SelectedInfoBases as List<(Guid Id, string Name)>;
+    var allInfoBases = ViewBag.AllInfoBases as SelectList;
+    var selectedUsers = ViewBag.SelectedUsers as List<(Guid Id, string Name)>;
+    var allUsers = ViewBag.AllUsers as SelectList;
+}
+
+<div class="col-md-4 no-padding">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+</div>
+<ul id="myTab" role="tablist" class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" id="ibs-tab" data-toggle="tab" role="tab" aria-controls="ibs" aria-selected="true" href="#ibs">Информационные базы</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="us-tab" data-toggle="tab" role="tab" aria-controls="us" aria-selected="false" href="#us">Пользователи</a>
+    </li>
+</ul>
+<div id="myTabContent" style="padding-top: 10px" class="tab-content">
+    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="ibs-tab" id="ibs">
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <select id="selectInfoBases" class="custom-select">
+                        @foreach (var item in allInfoBases)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <button id="addInfoBase" type="button" class="btn btn-primary">Добавить</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <table id="selectedInfoBases" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Наименование</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in selectedInfoBases)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                                <input type="hidden" name="selectedInfoBases" value="@item.Id" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" role="tabpanel" aria-labelledby="us-tab" id="us">
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col">
+                    <select id="selectUsers" class="custom-select">
+                        @foreach (var item in allUsers)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <button id="addUser" type="button" class="btn btn-primary">Добавить</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <table id="selectedUsers" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Наименование</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in selectedUsers)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                                <input type="hidden" name="selectedUsers" value="@item.Id" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        Common.connectSelectToTable($('#selectInfoBases'), $('#addInfoBase'), $('#selectedInfoBases'));
+        Common.connectSelectToTable($('#selectUsers'), $('#addUser'), $('#selectedUsers'));
+    });
+</script>

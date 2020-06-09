@@ -1,0 +1,150 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+    html {
+    font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .table-sm-sm th,
+    .table-sm-sm td {
+        padding: .3em !important;
+    }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.align-center-screen {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.no-padding {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+.table th {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.table td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.vertical-input-group .input-group:first-child {
+    padding-bottom: 0;
+}
+
+.vertical-input-group .input-group:first-child * {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.vertical-input-group .input-group:last-child {
+    padding-top: 0;
+}
+
+.vertical-input-group .input-group:last-child * {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.vertical-input-group .input-group:not(:last-child):not(:first-child) {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.vertical-input-group .input-group:not(:last-child):not(:first-child) * {
+    border-radius: 0;
+}
+
+.vertical-input-group .input-group:not(:first-child) * {
+    border-top: 0;
+}
+
+.nav-item-right-padding {
+    padding-right: 5px;
+}
+
+.nav-command-panel {
+
+}
+
+.nav-command-panel li:not(:last-child) {
+    padding-right: 10px;
+}
+
+.actions-column {
+
+}
+
+.actions-column a:not(:first-child) {
+    margin-left: 5px;
+}
+.actions-column a:not(:last-child) {
+    margin-right: 5px;
+}

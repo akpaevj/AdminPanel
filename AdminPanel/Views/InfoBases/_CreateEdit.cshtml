@@ -1,0 +1,92 @@
+﻿@model AdminPanel.ViewModels.InfoBases.InfoBaseViewModel
+
+@{ 
+    var selectedInfoBasesLists = ViewBag.SelectedInfoBasesLists as List<(Guid Id, string Name)>;
+    var allInfoBasesLists = ViewBag.AllInfoBasesLists as SelectList;
+}
+
+<div class="col-md-4 no-padding">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConnectionType" class="control-label"></label>
+        @Html.DropDownListFor(c => c.ConnectionType, Html.GetEnumSelectList<InfoBaseConnectionType>(), null, new { @class = "custom-select" })
+        <span asp-validation-for="ConnectionType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Server" class="control-label"></label>
+        <input asp-for="Server" class="form-control" />
+        <span asp-validation-for="Server" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="InfoBaseName" class="control-label"></label>
+        <input asp-for="InfoBaseName" class="form-control" />
+        <span asp-validation-for="InfoBaseName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Path" class="control-label"></label>
+        <input asp-for="Path" class="form-control" />
+        <span asp-validation-for="Path" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="URL" class="control-label"></label>
+        <input asp-for="URL" class="form-control" />
+        <span asp-validation-for="URL" class="text-danger"></span>
+    </div>
+</div>
+<div class="col-md-10 no-padding">
+    <div class="form-group">
+        <label class="control-label">Список информационных баз</label>
+        <div class="form-row">
+            <div class="col">
+                <select id="selectInfoBasesList" class="custom-select">
+                    @foreach (var item in allInfoBasesLists)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col">
+                <button id="addInfoBaseList" type="button" class="btn btn-primary">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <table id="selectedInfoBasesLists" class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Наименование</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in selectedInfoBasesLists)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                        <input type="hidden" name="selectedInfoBasesLists" value="@item.Id" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        Common.connectSelectToTable($('#selectInfoBasesList'), $('#addInfoBaseList'), $('#selectedInfoBasesLists'));
+
+        InfoBases.initInfoBaseCreateEditView();
+    });
+</script>

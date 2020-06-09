@@ -1,0 +1,44 @@
+﻿@model AdminPanel.ViewModels.Users.UserIndexViewModel
+
+@{
+    ViewData["Title"] = Html.DisplayNameForModel();
+}
+
+<h1>@Html.DisplayNameForModel()</h1>
+
+<div class="form-group">
+    <ul class="nav row">
+        <li class="nav-item col-sm-auto mr-sm-auto">
+            <button onclick="Users.updateFromActiveDirectory()" id="updateFromAd" class="btn btn-primary col-sm-auto">Обновить из ActiveDirectory</button>
+        </li>
+        <li class="nav-item col-sm-auto float-sm-right mt-2 mt-sm-0">
+            <input id="searchBox" type="text" class="form-control" placeholder="Поиск" />
+        </li>
+    </ul>
+</div>
+<table id="dataTable" class="table table-sm-sm table-responsive-sm table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(itemModel => itemModel.Items[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(itemModel => itemModel.Items[0].SamAccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(itemModel => itemModel.Items[0].InfoBasesList)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<nav id="pagesNav" aria-label="Page navigation">
+    <ul class="pagination justify-content-center"></ul>
+</nav>
+
+<script>
+    $(async function () {
+        await Users.initIndexView();
+    });
+</script>

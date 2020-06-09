@@ -1,0 +1,46 @@
+﻿@model AdminPanel.ViewModels.Users.UserViewModel
+
+@{
+    ViewData["Title"] = "Редактирование";
+    var allInfoBasesLists = ViewBag.AllInfoBasesLists as SelectList;
+}
+
+<h1>Редактирование</h1>
+
+<h4>@Html.DisplayNameForModel()</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div class="form-group">
+                <ul class="nav nav-command-panel">
+                    <li class="nav-item">
+                        <input type="submit" value="Записать" class="btn btn-primary" />
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Index" class="btn btn-secondary">К списку</a>
+                    </li>
+                </ul>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Id" type="hidden" class="form-control" />
+            <input asp-for="Sid" type="hidden" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SamAccountName" class="control-label"></label>
+                <input asp-for="SamAccountName" class="form-control" />
+                <input asp-for="SamAccountName" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="InfoBasesList" class="control-label"></label>
+                @Html.DropDownListFor(itemModel => itemModel.InfoBasesListId, allInfoBasesLists, "--Выберите значение--", new { @class = "custom-select" })
+                <input asp-for="InfoBasesList" type="hidden" class="form-control" />
+            </div>
+        </form>
+    </div>
+</div>
+

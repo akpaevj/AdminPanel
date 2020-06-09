@@ -1,0 +1,54 @@
+﻿@model AdminPanel.ViewModels.InfoBasesLists.InfoBasesListIndexViewModel
+
+@{
+    ViewData["Title"] = Html.DisplayNameForModel();
+}
+
+<h1>@Html.DisplayNameForModel()</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Создать</a>
+</p>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(itemModel => itemModel.Items[0].Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-secondary" asp-route-id="@item.Id">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.PagesAmount > 1)
+{
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= Model.PagesAmount; i++)
+            {
+                var addClass = Model.CurrentPage == i ? "active" : "";
+
+                <li class="page-item @addClass">
+                    <a class="page-link" href="/InfoBasesLists?page=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

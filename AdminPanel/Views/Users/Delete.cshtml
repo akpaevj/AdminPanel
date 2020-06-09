@@ -1,0 +1,31 @@
+﻿@model AdminPanel.ViewModels.Users.UserViewModel
+
+@{
+    ViewData["Title"] = "Удаление";
+}
+
+<h1>Удаление</h1>
+
+<h3>Пользователь будет удален, продолжить?</h3>
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SamAccountName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SamAccountName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-action="Index">К списку</a>
+    </form>
+</div>
