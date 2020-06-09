@@ -37,3 +37,7 @@
 
 Для начала использования вебсервиса WebCommonInfoBases необходимо в файле 1cestart.cfg заполнить параметр InternetService 
 или WebDistributiveLocation, указав в значении адрес сайта.
+
+![Alt text](/Users.png)
+![Alt text](/InfoBasesLists.png)
+![Alt text](/InfoBases.png)
