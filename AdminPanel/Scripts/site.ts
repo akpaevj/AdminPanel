@@ -1,4 +1,14 @@
-﻿namespace Common {
+﻿function getUrl(url: string) {
+    const path = window.location.pathname;
+
+    if (path != '' && path != '/' && path != null) {
+        return `${path}/${url}`;
+    }
+
+    return url;
+}
+
+namespace Common {
     export class ItemViewModel {
         id: string;
         name: string;
@@ -226,13 +236,13 @@ namespace Users {
     }
 
     export async function initIndexView(): Promise<void> {
-        const url = '/Users/GetUsers';
+        const url = getUrl('Users/GetUsers');
 
         await getUsers(url, 1, '');
 
         var time = 0;
 
-        $('#searchBox').keyup(async function (event) {
+        $('#searchBox').keyup(function (event) {
             clearTimeout(time);
 
             time = window.setTimeout(async function () {

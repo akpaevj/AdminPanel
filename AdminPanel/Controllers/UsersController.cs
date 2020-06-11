@@ -18,10 +18,12 @@ using System.Text;
 using System.Security.Principal;
 using AdminPanel.ViewModels.InfoBasesLists;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Http;
 
 namespace AdminPanel.Controllers
 {
-    [Authorize(Policy = "OnlyAdmins")]
+    [Authorize(Policy = "Admins")]
     public class UsersController : Controller
     {
         private readonly AppDbContext _context;

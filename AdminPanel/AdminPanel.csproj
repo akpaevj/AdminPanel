@@ -4,6 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>AdminPanel</RootNamespace>
     <AssemblyName>AdminPanel</AssemblyName>
+    <Authors>Akpaev Evgeniy</Authors>
+    <Company>Akpaev Evgeniy</Company>
+    <Copyright>Akpaev Evgeniy</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

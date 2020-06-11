@@ -47,6 +47,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+function getUrl(url) {
+    var path = window.location.pathname;
+    if (path != '' && path != '/' && path != null) {
+        return path + "/" + url;
+    }
+    return url;
+}
 var Common;
 (function (Common) {
     var ItemViewModel = /** @class */ (function () {
@@ -269,33 +276,28 @@ var Users;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = '/Users/GetUsers';
+                        url = getUrl('Users/GetUsers');
                         return [4 /*yield*/, getUsers(url, 1, '')];
                     case 1:
                         _a.sent();
                         time = 0;
                         $('#searchBox').keyup(function (event) {
-                            return __awaiter(this, void 0, void 0, function () {
-                                return __generator(this, function (_a) {
-                                    clearTimeout(time);
-                                    time = window.setTimeout(function () {
-                                        return __awaiter(this, void 0, void 0, function () {
-                                            var term;
-                                            return __generator(this, function (_a) {
-                                                switch (_a.label) {
-                                                    case 0:
-                                                        term = $('#searchBox').val();
-                                                        return [4 /*yield*/, getUsers(url, 1, term)];
-                                                    case 1:
-                                                        _a.sent();
-                                                        return [2 /*return*/];
-                                                }
-                                            });
-                                        });
-                                    }, 500);
-                                    return [2 /*return*/];
+                            clearTimeout(time);
+                            time = window.setTimeout(function () {
+                                return __awaiter(this, void 0, void 0, function () {
+                                    var term;
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0:
+                                                term = $('#searchBox').val();
+                                                return [4 /*yield*/, getUsers(url, 1, term)];
+                                            case 1:
+                                                _a.sent();
+                                                return [2 /*return*/];
+                                        }
+                                    });
                                 });
-                            });
+                            }, 500);
                         });
                         return [2 /*return*/];
                 }

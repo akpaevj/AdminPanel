@@ -17,7 +17,7 @@ using AutoMapper.EntityFrameworkCore;
 
 namespace AdminPanel.Controllers
 {
-    [Authorize(Policy = "OnlyAdmins")]
+    [Authorize(Policy = "Admins")]
     public class InfoBasesListsController : Controller
     {
         private readonly AppDbContext _context;

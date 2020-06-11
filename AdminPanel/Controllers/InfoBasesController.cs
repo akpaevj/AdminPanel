@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AdminPanel.Controllers
 {
-    [Authorize(Policy = "OnlyAdmins")]
+    [Authorize(Policy = "Admins")]
     public class InfoBasesController : Controller
     {
         private readonly AppDbContext _context;
@@ -190,8 +190,20 @@ namespace AdminPanel.Controllers
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var infoBase = await _context.InfoBases.FindAsync(id);
+
+            var infoBasesLists = await _context.InfoBaseInfoBasesLists
+                .Where(c => c.InfoBaseId == id)
+                .Include(c => c.InfoBasesList)
+                .Select(c => c.InfoBasesList)
+                .ToArrayAsync();
+
+            foreach (var item in infoBasesLists)
+                UpdateInfoBasesListId(item);
+
             _context.InfoBases.Remove(infoBase);
+
             await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 

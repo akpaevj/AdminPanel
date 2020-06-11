@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
 using AutoMapper;
 using AutoMapper.EquivalencyExpression;
 using Microsoft.AspNetCore.Authentication.Negotiate;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace AdminPanel
@@ -31,13 +26,20 @@ namespace AdminPanel
                 .AddNegotiate();
 
             var adminGroup = Configuration["Security:AdminGroup"];
+            var userGroup = Configuration["Security:UserGroup"];
 
             services.AddAuthorization(opt =>
-                opt.AddPolicy("OnlyAdmins", policy =>
-                {
+            {
+                opt.AddPolicy("Admins", policy => {
                     policy.RequireAuthenticatedUser();
                     policy.RequireRole(adminGroup);
-                }));
+                });
+
+                opt.AddPolicy("Users", policy => {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole(userGroup);
+                });
+            });
 
             services.AddAutoMapper(c => c.AddCollectionMappers(), typeof(Startup));
             services.AddControllersWithViews();
@@ -45,13 +47,13 @@ namespace AdminPanel
                 .AddDbContext<AppDbContext>((sp, opt) =>
                     opt.UseSqlServer(Configuration["ConnectionStrings:Default"])
                         .UseInternalServiceProvider(sp));
+
+            services.AddSingleton(new AuthMiddleware(userGroup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //env.EnvironmentName = "Production";
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -68,6 +70,8 @@ namespace AdminPanel
 
             app.UseRouting();
 
+            app.UseMiddleware<AuthMiddleware>();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -76,7 +80,6 @@ namespace AdminPanel
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Users}/{action=Index}/{id?}");
-                //.RequireAuthorization();
             });
         }
     }

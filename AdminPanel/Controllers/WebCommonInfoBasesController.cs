@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace AdminPanel.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class WebCommonInfoBasesController : Controller
     {
         private readonly AppDbContext _context;
@@ -64,6 +64,7 @@ namespace AdminPanel.Controllers
         }
 
         [HttpGet("GetInfoBases")]
+        [Authorize(Policy = "Users")]
         public async Task<IActionResult> GetInfoBases(string ClientId, string InfoBasesCheckCode)
         {
             if (!Guid.TryParse(ClientId, out Guid clientIdGuid) ||
